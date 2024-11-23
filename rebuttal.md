@@ -123,18 +123,17 @@ We believe this is a quite important and challenging topic, and we will leave th
 
 # To R7
 Q1: Whether the retrieval pattern holds in general query settings
-Yes, the retrieval patterns are highly consistent under different input queries. In Figure.xxx we provide the retrieval heads selected using different Needle In A Haystack queries.
-The authors identify retrieval heads as echo heads and induction heads, demonstrated through an example using a synthetic repeated sequence. However, this example appears specifically designed to highlight these two types of heads. It raises the question of whether this pattern holds in more generalized query settings. Intuitively, it does not seem that in every type of query, the most crucial information is located solely in echo or induction tokens. Would these patterns still be dominant in more diverse and complex input data?
+Thank you for pointing this out. The retrieval patterns remain highly consistent across different input queries, suggesting that they are indeed model-based rather than query-specific. In Figure XXX, we illustrate the retrieval heads selected using various “Needle in a Haystack” queries, demonstrating that the selected heads are unchanged across different inputs. Furthermore, we validate these findings on diverse and complex datasets such as LongBench (Table 3) and InfiniBench/Ruler (results provided below). These benchmarks encompass a wide variety of complex task sources, and RazorAttention successfully retains the original performance. This consistency reinforces the generalizability of the observed retrieval patterns, particularly for lengthy inputs (noting that KV cache compression is not applied to inputs shorter than 4k, as described in Table 2).
 
 Q2: Comparison with SnapKV
-The authors state that they did not compare their method with SnapKV because SnapKV relies on the query for selecting the kv cache. However, this reasoning is weak, as SnapKV is a well-known and accepted method in the field. A comparison would provide more comprehensive insights.
+xxx
 
 Q3: The retrieval pattern among different queries
-Yes, the retrieval patterns are highly consistent under different input queries, which means they are model-based and not query-based. In Figure.xxx we provide the retrieval heads selected using different Needle In A Haystack queries, and we can see that the selected heads remain unchanged among different inputs.
+As mentioned in response to Q1, the retrieval patterns are highly consistent across different input queries, indicating they are primarily model-based and not query-specific. 
 
 Q4: The effectiveness of the compensation token
-In Figure.7 we provide the ablation results for using the compensation token. The two experiments use the same KV cache allocation and the accuracy is significantly improved with compensation tokens included. We believe this is a clear evidence proving that the compensation is an essential component for reducing the information loss. The combination of the compensation token with other baseline algorithm would be a very interesting idea and we will leave this to our future study.
+In Figure 7, we present ablation studies examining the impact of compensation tokens. Both experiments were conducted with identical KV cache allocations, and the inclusion of compensation tokens resulted in significant accuracy improvements. This evidence highlights the critical role of compensation tokens in mitigating information loss due to KV cache reduction. Exploring the combination of compensation tokens with other baseline algorithms is an exciting direction, and we plan to investigate this in future studies.
 
 Q5: The KV cache budget for different algorithms
-In Table.2 we illustrate the KV cache compression setup for RazorAttention, which means the total compression ratio might be different depending on the input length. Therefore we keep the compression ratio the same with RazorAttention for each baseline for a fair comparison.
+Table 2 outlines the KV cache compression setup for RazorAttention. For a fair comparison, the total compression ratio for each baseline was adjusted to match RazorAttention’s configuration, ensuring consistent evaluation across varying input lengths. However, as the input length increases, the absolute KV cache budget may differ proportionally due to RazorAttention’s dynamic compression strategy.
 
